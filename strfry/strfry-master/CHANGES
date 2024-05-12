@@ -1,0 +1,44 @@
+0.9.6
+  * Bugfix: Sometimes malformed or old-format negentropy messages would throw
+    uncaught exceptions which would cause the relay to crash. Now it properly
+    handles and reports this situation in both logs and to the other side
+    of the protocol.
+  * New config option: relay.negentropy.enabled. Default is true. Set this to
+    false if you wish to entirely stop the relay from handling negentropy messages.
+
+0.9.5
+  * New feature: strfry router!
+  * INCOMPATIBLE change: The "lookbehind" feature of plugins was removed
+  * INCOMPATIBLE change to negentropy sync protocol! (again)
+    - The fingerprint function has now been changed to SHA-256, to protect the
+      integrity of the sync mechanism in the presence of adversarial event creators
+    - Going forward, the protocol now has mechanisms for backwards/forwards compatibility
+  * Bugfix: Prevent a crash when a non-indexOnly scan was paused and then one of the
+    buffered levIds was deleted or replaced before the scan resumed
+  * Plugins can now be specified as shell commands, so you can pass command-line switches
+    to them, set environment variables, use pipes/redirects, etc.
+  * Plugins now propagate the environment variables of the strfry process to the
+    plugin processes
+  * Now if you don't return a "msg" (or return an empty string), it will no longer
+    pollute your logs with "blocked event" messages
+
+0.9.4
+  * INCOMPATIBLE change to negentropy sync protocol!
+    - Necessary because the protocol had an unfixable issue when syncing a very large DB
+      into a small DB while using frameSizeLimit (sorry!)
+  * If a client disconnects before its pending EVENT write messages have been processed,
+    drop those messages instead of trying to write them
+  * Bulk export commands now exit gracefully on a SIGPIPE
+  * Fixed a race condition when sync command exits
+  * Some optimisations in sync and export
+  * noReadAhead config option: can reduce IO usage on instances where DB size > memory
+  * Close the LMDB map file when execing plugins (works around LMDB bug)
+
+0.9.3
+  * Limit on events that can be processed by a sync
+    - Configurable with relay.negentropy.maxSyncEvents
+  * Warn when NIP-11 pubkey is in incorrect format (#52)
+  * Bugfix: Setting rejectEphemeralEventsOlderThanSeconds larger than ephemeralEventsLifetimeSeconds did
+    not work because events were then considered expired
+  * Config parameter to silence "Rejected invalid event" logs: relay.logging.invalidEvents
+  * Detect overflows when rejectEvents* config params are set very large

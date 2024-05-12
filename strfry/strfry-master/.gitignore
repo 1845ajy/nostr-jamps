@@ -1,0 +1,7 @@
+/build/
+*.d
+*.o
+/strfry
+/strfry-db/*.mdb
+.vscode/*
+/strfry-db-test/

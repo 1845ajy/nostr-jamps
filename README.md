@@ -18,6 +18,8 @@ you can stop the relay as follows
 
 docker stop rnostr/rnostr
 
+start the bash command
+
 
 ajs branch
 

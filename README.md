@@ -1,6 +1,6 @@
 "# nostr-jamps" 
 
-This readmefile has the information on the nostr proeject
+This readmefile has the information on the nostr project
 
 #First step is to build a image to the dockerfile in the rnostr relay 
 
@@ -17,7 +17,6 @@ http://localhost:7000/
 you can stop the relay as follows 
 
 docker stop rnostr/rnostr
-
 
 
 ajs branch

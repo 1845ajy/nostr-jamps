@@ -14,6 +14,12 @@ you can access this relay on your web browser on
 
 http://localhost:7000/
 
+you can stop the relay as follows 
+
+docker stop rnostr/rnostr
+
+
+
 ajs branch
 
 This is the nostr repo 
